@@ -14,7 +14,7 @@ namespace Dijkstras
 
             //Generate single source shortest path based on graph given
             Dijkstras d = new Dijkstras(vertices, edges);
-            d.generateSingleSourceShortestPath();
+            d.Generate();
             Console.WriteLine(d.ToString());
         }
 
@@ -63,36 +63,39 @@ namespace Dijkstras
         private List<Edge> edges { get; set; }
         private Dictionary<string, int> distance;
         private Dictionary<string, string> predecessor;
-        private Queue<Vertex> queue;
+        private List<Vertex> queue;
 
         public Dijkstras(List<Vertex> vertices, List<Edge> edges)
         {
             this.vertices = vertices;
             this.edges = edges;
-            queue = new Queue<Vertex>();
             distance = new Dictionary<string, int>();
             predecessor = new Dictionary<string, string>();
-    }
+        }
 
-        public void generateSingleSourceShortestPath()
+        public void Generate()
         {
-            foreach(Vertex v in vertices)
+            queue = new List<Vertex>(vertices);
+            foreach (Vertex v in vertices)
             {
                 distance.Add(v.Name, int.MaxValue/2);
             }
             distance["a"] = 0;
-            queue = new Queue<Vertex>(vertices);
-            queue.OrderBy(v => v.Name);
-            while(queue.Count != 0)
+            while(queue.Count > 0)
             {
-                Vertex u = queue.Dequeue();
-                foreach(Edge v in getAdj(u))
+                string key = getMin();
+                Vertex u = queue.Where(v => v.Name == key).First();
+                queue.Remove(u);
+                var adj = getAdj(u);
+                foreach(Edge v in adj)
                 {
                     if (distance[v.To.Name] > (distance[u.Name] + v.Weight))
                     {
                         distance[v.To.Name] = distance[u.Name] + v.Weight;
+                        predecessor[v.To.Name] = u.Name;
                     }
                 }
+                u.Visited = true;
             }
         }
 
@@ -101,12 +104,36 @@ namespace Dijkstras
             return edges.Where(e => e.From.Name == v.Name).ToList();
         }
 
+        private string getMin()
+        {
+            int min = int.MaxValue - 1;
+            string key = null;
+            foreach(Edge e in edges)
+            {
+                if(e.From.Visited == false && distance[e.From.Name] <= min)
+                {
+                    min = e.Weight;
+                    key = e.From.Name;
+                }
+            }
+            return key;
+        }
+
         public override string ToString()
         {
-            return distance.ToString();
+            string toString = "Distance Table: \n";
+            foreach(KeyValuePair<string, int> entry in distance)
+            {
+                toString += "Vertex: " + entry.Key + "\t|\t Distance: " + entry.Value + "\n";
+            }
+            toString += "\nPredecessor Table: \n";
+            foreach(KeyValuePair<string,string> entry in predecessor)
+            {
+                toString += "Vertex: " + entry.Key + "\t|\t Predecessor: " + entry.Value + "\n";
+            }
+            return toString;
         }
     }
-
 
     class Vertex
     {

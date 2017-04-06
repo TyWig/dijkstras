@@ -3,3 +3,9 @@ C:\Users\tylerwigington\Desktop\Dijkstras\Dijkstras\bin\Debug\Dijkstras.exe
 C:\Users\tylerwigington\Desktop\Dijkstras\Dijkstras\bin\Debug\Dijkstras.pdb
 C:\Users\tylerwigington\Desktop\Dijkstras\Dijkstras\obj\Debug\Dijkstras.exe
 C:\Users\tylerwigington\Desktop\Dijkstras\Dijkstras\obj\Debug\Dijkstras.pdb
+C:\Users\tyler\Desktop\Dijkstras\Dijkstras\bin\Debug\Dijkstras.exe.config
+C:\Users\tyler\Desktop\Dijkstras\Dijkstras\bin\Debug\Dijkstras.exe
+C:\Users\tyler\Desktop\Dijkstras\Dijkstras\bin\Debug\Dijkstras.pdb
+C:\Users\tyler\Desktop\Dijkstras\Dijkstras\obj\Debug\Dijkstras.exe
+C:\Users\tyler\Desktop\Dijkstras\Dijkstras\obj\Debug\Dijkstras.pdb
+C:\Users\tyler\Desktop\Dijkstras\Dijkstras\obj\Debug\Dijkstras.csprojResolveAssemblyReference.cache
